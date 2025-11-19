@@ -5,7 +5,7 @@ This is a project where I tested out and learned how to use the [UMG ViewModel P
 > In this project I have tried to tackle one of the areas that I had the most trouble with initially which was how to link your widgets/views to your viewmodels.<br />
 > Hopefully this can help whoever is trying to setup their UI with MVVM and show the possible approaches they can take.
 
-That said, there are some great resources other than Unreal's own documentation that helped me understand the Hows and Whys when implementing this. I won't be going into the basics of what MVVM is and its advantages over traditional MVC, so I recommend going through the links below.
+That said, there are some great resources other than Unreal's own documentation that helped me understand the Hows and the Whys when implementing this. I won't be going into the basics of what MVVM is and its advantages over traditional MVC, so I recommend going through the links below.
 - [Building More Robust and Testable UIs using MVVM | Unreal Fest 2023](https://dev.epicgames.com/community/learning/talks-and-demos/pw3Y/unreal-engine-umg-viewmodels-building-more-robust-and-testable-uis-using-mvvm-unreal-fest-2023)
 - [Model View ViewModel for Game Devs](https://miltoncandelero.github.io/unreal-viewmodel)
 - [UMG Viewmodel Basics](https://mvvm.labutin.gg/)
@@ -23,16 +23,16 @@ That said, there are some great resources other than Unreal's own documentation 
 > This project is not an example of best UI/UMG practices or what an ideal architecture should be, the goal is to showcase the different ways viewmodels can be setup to work with your widgets.<br />
 
 ## The Model, The View and The ViewModel
-Here is a simple diagram showing the how the data flows between the different UI elements in this project as per the MVVM design. <br /> 
+Here is a simple diagram showing how the data flows between the different UI elements in this project as per the MVVM design. <br /> 
 
 <img width=75% height=75% src="https://github.com/user-attachments/assets/b5fdd078-f54b-40cc-8c74-d9b8306934d7" />
 
 ## Who Creates the ViewModels and How it Connects to the Widgets?
-This is the hard part of setting up the MVVM UI in your project, not because it is complicated but because there are multiple ways you can do it (called the ViewModel "Creation Types"), and each of these require different setup.<br /> 
+This is the hard part of setting up the MVVM UI in your project, not because it is complicated but because there are multiple ways you can do it (called the "Creation Type" when adding a viewmodel in the widget), and each of these require different setup.<br /> 
 
 <img width=50% height=50% src="https://github.com/user-attachments/assets/fabb298c-ed26-4ae8-81c4-99f12e96ea37" /><br />
 
-For the most part, all the widgets and the viewmodels are created and initialized in the [HUD_MVVM](https://github.com/mab09/Unreal-MVVM-Pattern-Examples/blob/main/Content/ThirdPerson/Blueprints/HUD_MVVM.uasset) (Check the `CreateWidgets()` and `InitializeVMs()` functions), how it all comes together depends on the creation type.
+For the most part in this project, all the widgets and the viewmodels are created and initialized in the [HUD_MVVM](https://github.com/mab09/Unreal-MVVM-Pattern-Examples/blob/main/Content/ThirdPerson/Blueprints/HUD_MVVM.uasset) (Check the `CreateWidgets()` and `InitializeVMs()` functions), how it all comes together depends on the creation type.
 > [!TIP]
 > The HUD in my opinion is a good place to create and initialize these UI related objects, another way is to have something like a UI manager component on the player controller or player state.
 
@@ -80,7 +80,8 @@ In this method, after initialization, the viewmodel is stored in a global collec
 > At initialization, execute a function to find the Viewmodel. The Viewmodel Property Path uses member names separated by periods. For example: `GetPlayerController.Vehicle.ViewModel` Property paths are always relative to the widget.
 
 The [Pause Menu UI](https://github.com/mab09/Unreal-MVVM-Pattern-Examples/blob/main/Content/UI/Widgets/WBP_PauseMenu.uasset) is implemented through this type.<br />
-In this method, the viewmodel may be initialized anywhere as long as the widget can find its reference through a chain of functions/properties. Here  we initialize the viewmodel in the HUD and then the widget finds it through a local helper function `GetViewModel()`
+In this method, the viewmodel may be initialized anywhere as long as the widget can find its reference through a chain of functions/properties. Here  we initialize the viewmodel in the HUD and then the widget finds it through a local helper function `GetViewModel()`<br />
+
 <img width=50% height=50% src="https://github.com/user-attachments/assets/e00d9fa0-6363-4452-8a0c-9228ea3cd36c" /><br /><br />
 
 <img width=50% height=50% src="https://github.com/user-attachments/assets/7a1c1e31-971b-4b11-aebc-0d5edac2f2d1" /><br /><br />
@@ -95,7 +96,6 @@ In this method, the viewmodel may be initialized anywhere as long as the widget 
 
 ### Creation Type 5: Resolver
 The [Stamina Bar UI](https://github.com/mab09/Unreal-MVVM-Pattern-Examples/blob/main/Content/UI/Widgets/WBP_StatusBars.uasset) is implemented through this type.<br />
-
 In this method, each ViewModel comes with a ViewModel Resolver (VMR), The resolver's sole purpose is to locate the ViewModel. <br />
 Here the stamina ViewModel is intialized in the player HUD and then the resolver finds that viewmodel using a blueprint interface implemented on the HUD.<br />
 <img width=50% height=50% src="https://github.com/user-attachments/assets/5a10bbe3-3097-438e-afde-a3bcea39fdb2" /><br /><br />
@@ -109,15 +109,15 @@ Here the stamina ViewModel is intialized in the player HUD and then the resolver
 https://github.com/user-attachments/assets/b2fa917b-367e-472b-8087-2bda625ebaa6
 
 As I mentioned before this project showcases a very specific aspect of setting up MVVM in unreal, which seemed to have been a common point of confusion and difficulty (atleast at the time I made this), So I hope this project covers that aspect extensively enough to clear the confusion.<br />
-There are other aspects of course like how to setup the bindings which I won't be writing about here but you can go through the widgets to have a look.<br /> 
+There are other aspects like how to setup the bindings which I won't be writing about here but you can go through the widgets to have a look.<br /> 
 Overall here are some of the things you might want to consider when setting up your MVVM architecture:
 - The ViewModel to Widget relationship can be one-to-many or many-to-one.
-  - Many-to-One is useful for stuff like the StatusBar widget where one widget needs information of different things like the Health and Stamina
-  - One-to-Many is useful if one piece of information might be needed by different widgets like health is needed by the health bar and maybe also a screen effect
+  - Many-to-One is useful for stuff like the StatusBar widget where one widget needs information of different things like the Health and Stamina.
+  - One-to-Many is useful if one piece of information might be needed by different widgets like health is needed by the health bar and maybe also a screen effect UI.
 - Property bindings can be _One Time to Widget_, _One Way To Widget_, _One Way to ViewModel_ or _Two Way_ , out of which I was not able to fully utilize _Two Way_ in this project, that should be useful for highly interactive  widgets like an inventory menu.
 - Property bindings have in-built conversion functions, so you can do basic math, string conversion and much more in the binding itself without having to write custom logic for it.
-- I believe that the 'Global ViewModel Collection' and 'Resolver' creation types give the maximum decoupling, a combination of the two might be the best approach. But note that achieving the maximum decoupling might be overkill for small projects and smaller teams. In my opinion, this is only beneficial if you have different people working on the UI functionality and the UI visuals.
-- An MVVM style architecture itself may be overkill for a project. While it is possible to base your entire UI on MVVM, it might be more beneficial to use it in certain UI elements while sticking to traditional ways in others. Remember, this is still a beta feature so it may restrict you if you are using other UI features like CommonUI.
+- I believe that the 'Global ViewModel Collection' and 'Resolver' creation types give the maximum decoupling, a combination of the two might be the best approach. But note that achieving the maximum decoupling might be overkill for small projects and smaller teams. In my opinion, this is mostly beneficial if you have different people working on the UI functionality vs the UI visuals.
+- An MVVM style architecture itself may be overkill for a project. While it is possible to base your entire UI on MVVM, it might be more beneficial to use it in certain UI elements, while sticking to traditional ways in others. Remember, this is still a beta feature so it may restrict you when using other UI features like CommonUI.
 
 ## Example of an Advanced Architecture
 Here is one of early iterations of the UI architecture I implemented in a larger project that I was working on. We made quite a few changes later on but this is the first working example I made of a fully MVVM based UI architecture in Unreal. <br />
