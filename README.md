@@ -108,8 +108,9 @@ Here the stamina ViewModel is intialized in the player HUD and then the resolver
 
 https://github.com/user-attachments/assets/b2fa917b-367e-472b-8087-2bda625ebaa6
 
-As I mentioned before this project showcases a very specific aspect of setting up MVVM in unreal, which seemed to have been a common point of confusion and difficulty (atleast at the time I made this), So I hope this project covers that aspect extensively enough to clear the confusion.<br />
+As I mentioned before, this project looks at a very specific aspect of setting up MVVM in unreal, which seemed to have been a common point of confusion and difficulty (atleast at the time I made this), So I hope this project covers that aspect extensively enough to clear the confusion.<br />
 There are other aspects like how to setup the bindings which I won't be writing about here but you can go through the widgets to have a look.<br /> 
+
 Overall here are some of the things you might want to consider when setting up your MVVM architecture:
 - The ViewModel to Widget relationship can be one-to-many or many-to-one.
   - Many-to-One is useful for stuff like the StatusBar widget where one widget needs information of different things like the Health and Stamina.
