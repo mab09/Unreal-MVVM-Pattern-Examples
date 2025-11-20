@@ -8,7 +8,7 @@ This is a project where I tested out and learned how to use the [UMG ViewModel P
 That said, there are some great resources other than Unreal's own documentation that helped me understand the Hows and the Whys when implementing this. I won't be going into the basics of what MVVM is and its advantages over traditional MVC, so I recommend going through the links below.
 - [Building More Robust and Testable UIs using MVVM | Unreal Fest 2023](https://dev.epicgames.com/community/learning/talks-and-demos/pw3Y/unreal-engine-umg-viewmodels-building-more-robust-and-testable-uis-using-mvvm-unreal-fest-2023)
 - [Model View ViewModel for Game Devs](https://miltoncandelero.github.io/unreal-viewmodel)
-- [UMG Viewmodel Basics](https://mvvm.labutin.gg/)
+- [Handling UI Navigation with MVVM and Common Activatable Widgets](https://dev.epicgames.com/community/learning/tutorials/ep4k/unreal-engine-handling-ui-navigation-with-mvvm-and-common-activatable-widgets#documentation&tutorials)
 
 ## Project Information
 - This project uses the ThirdPerson template and implements some basic UI elements:
