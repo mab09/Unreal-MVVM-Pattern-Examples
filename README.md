@@ -73,7 +73,7 @@ In this method, after initialization, the viewmodel is stored in a global collec
 <img width=50% height=50% src="https://github.com/user-attachments/assets/faaf0feb-9475-44fe-9cca-ddae1f653948" />
 
 > [!TIP]
-> This is one of my favorite methods. Through this your widget blueprint is completely free of any model related information, allowing a highly decoupled architecture.<br />
+> Through this method, your widget blueprint is completely free of any model related information, allowing a highly decoupled architecture.<br />
 > In a larger project this might become harder to maintain considering the number of viewmodels that might exist, in that case, this method can be used for parent viewmodels that encapsulate a bunch of other small ones, which in turn may use a different creation type like 'Resolver'
 
 ### Creation Type 4: Property Path
